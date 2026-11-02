@@ -6,12 +6,6 @@ public class Wifi {
         int to, w;
         Edge(int to, int w) { this.to = to; this.w = w; }
     }
-
-    /**
-     * Мульти-источниковая Дейкстра: старт сразу из всех точек входа.
-     * @return сумма кратчайших расстояний до ближайшей точки входа.
-     * Сложность O((r + e) log r).
-     */
     public static long totalDelay(int r, List<int[]> edges, int[] entryPoints) {
         List<List<Edge>> graph = new ArrayList<>(r);
         for (int i = 0; i < r; i++) graph.add(new ArrayList<>());
@@ -26,7 +20,6 @@ public class Wifi {
         long[] dist = new long[r];
         Arrays.fill(dist, INF);
 
-        // Приоритетная очередь пар (dist, vertex)
         PriorityQueue<long[]> pq = new PriorityQueue<>(Comparator.comparingLong(a -> a[0]));
 
         for (int s : entryPoints) {
@@ -40,7 +33,7 @@ public class Wifi {
             long[] cur = pq.poll();
             long d = cur[0];
             int u = (int) cur[1];
-            if (d > dist[u]) continue;              // устаревшая запись
+            if (d > dist[u]) continue;
 
             for (Edge e : graph.get(u)) {
                 long nd = dist[u] + e.w;

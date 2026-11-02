@@ -40,7 +40,6 @@ public class DextraFly {
             }
         }
 
-        // приводим INF к -1 (недостижимо)
         for (int i = 0; i < c; i++) if (dist[i] == INF) dist[i] = -1;
         return dist;
     }
